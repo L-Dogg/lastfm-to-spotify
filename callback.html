@@ -2,12 +2,17 @@
 <head>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script
+			src="https://code.jquery.com/jquery-3.1.1.min.js"
+			integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			crossorigin="anonymous">
+
+	</script>
 <script>
 
 var g_access_token = '';
 var g_username = '';
-var g_tracks = [];
+var g_tracks = '';
 
 function getUsername(callback) {
 	console.log('getUsername');
@@ -56,10 +61,13 @@ function addTracksToPlaylist(username, playlist, tracks, callback) {
 	console.log('addTracksToPlaylist', username, playlist, tracks);
 	var url = 'https://api.spotify.com/v1/users/' + username +
 		'/playlists/' + playlist +
-		'/tracks'; // ?uris='+encodeURIComponent(tracks.join(','));
+		'/tracks?uris=' + g_tracks;
+
+
+
 	$.ajax(url, {
 		method: 'POST',
-		data: JSON.stringify(tracks),
+		/*data: JSON.stringify(tracks),*/
 		dataType: 'text',
 		headers: {
 			'Authorization': 'Bearer ' + g_access_token,
@@ -75,8 +83,10 @@ function addTracksToPlaylist(username, playlist, tracks, callback) {
 	});
 }
 
-function doit() {
-	// parse hash
+function startProcessing() {
+
+    console.log('start processing');
+
 	var hash = location.hash.replace(/#/g, '');
 	var all = hash.split('&');
 	var args = {};
@@ -89,7 +99,9 @@ function doit() {
 	});
 
 	g_name = localStorage.getItem('createplaylist-name');
-	g_tracks = JSON.parse(localStorage.getItem('createplaylist-tracks'));
+	g_tracks = localStorage.getItem('createplaylist-tracks');
+
+	console.log(g_tracks);
 
 	console.log('got args', args);
 
@@ -143,7 +155,7 @@ function doit() {
 
 </style>
 </head>
-<body onload="doit()">
+<body onload="startProcessing()">
 	<div class="site-wrapper">
 		<div class="site-wrapper-inner">
 			<div id="creating" style="text-align: center;">
