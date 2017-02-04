@@ -1,0 +1,38 @@
+<html>
+<head>
+<script
+		src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+<script type="text/javascript" src="app.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
+<style type="text/css">
+
+	.jumbotron p {
+		color: #aaa;
+	}
+
+	.jumbotron a {
+		color: #fff;
+	}
+
+</style>
+</head>
+<body onload="startApp()">
+	<div class="container">
+			<div class="col-md-6">
+				<h2>Song list:</h2>
+				<ul class="list-group">
+					 <li class="list-group-item">First item</li>
+					 <li class="list-group-item">Second item</li>
+					 <li class="list-group-item">Third item</li>
+				</ul>
+				<p>
+					<button class="btn btn-lg btn-primary btn-failure" id="loadLoved">Get Last.fm Loved Tracks</button>
+					<button class="btn btn-lg btn-primary btn-success" id="start">Create a Spotify playlist</button>
+				</p>
+			</div>
+	</div>
+</body>
+</html>
