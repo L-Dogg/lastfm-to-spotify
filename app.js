@@ -24,7 +24,7 @@
 				id = response.tracks.items[0].id;
 
                 g_tracks = g_tracks + (prefix + id) + ",";
-				console.log(id);
+				//console.log(id);
             },
 			error: function (response) {
                 console.log(response);
@@ -60,12 +60,18 @@
 
         tracks = new Array();
         var ul = document.getElementById("trackList");
-
+        var i = 0;
+        var k = 0;
 		trackList.forEach(function (track) {
 			var current = {
                 artist: track.artist.name,
                 song: track.name
             };
+
+			setTimeout(function () {
+                findOnSpotify(current);
+            }, k * 200);
+
             findOnSpotify(current);
 			current.spotifyId = id;
             tracks.push(current);
@@ -74,6 +80,13 @@
             li.className = "list-group-item";
             li.appendChild(document.createTextNode(current.artist + " - " + current.song));
             ul.appendChild(li);
+
+            i++;
+            if (i % 80 === 0)
+            {
+                k++;
+                console.log("interval for i = " + i + " k = " + k);
+            }
         })
     }
 
