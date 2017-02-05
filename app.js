@@ -86,10 +86,8 @@
 			'&scope=playlist-read-private%20playlist-modify%20playlist-modify-private' +
 			'&redirect_uri=' + encodeURIComponent(redirect_uri);
 		localStorage.setItem('createplaylist-tracks', g_tracks.slice(0, -1));
-		localStorage.setItem('createplaylist-name', g_name);
+		localStorage.setItem('createplaylist-name', document.getElementById('playlistNameInput').value);
 		var w = window.open(url, 'window', 'WIDTH=400,HEIGHT=500');
-		w.window.localStorage.setItem('createplaylist-tracks', g_tracks.slice(0, -1));
-		w.window.localStorage.setItem('createplaylist-name', g_name);
 	}
 
 	exports.startApp = function() {
