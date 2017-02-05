@@ -63,8 +63,6 @@ function addTracksToPlaylist(username, playlist, tracks, callback) {
 		'/playlists/' + playlist +
 		'/tracks?uris=' + g_tracks;
 
-
-
 	$.ajax(url, {
 		method: 'POST',
 		/*data: JSON.stringify(tracks),*/
@@ -106,7 +104,6 @@ function startProcessing() {
 	console.log('got args', args);
 
 	if (typeof(args['access_token']) != 'undefined') {
-		// got access token
 		console.log('got access token', args['access_token']);
 		g_access_token = args['access_token'];
 	}

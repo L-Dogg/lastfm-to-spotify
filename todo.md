@@ -3,4 +3,3 @@ todo:
     * passing many tracks
     * styling
     * list checkboxes to edit playlist
-    * username box

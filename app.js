@@ -17,7 +17,10 @@
 				limit: '1'
             },
             success: function (response) {
-        	    // todo error handling if undefined
+
+        	    if (response.tracks == null || response.tracks.items == null || response.tracks.items.length < 1)
+        	        return;
+
 				id = response.tracks.items[0].id;
 
                 g_tracks = g_tracks + (prefix + id) + ",";
