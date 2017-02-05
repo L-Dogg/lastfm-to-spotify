@@ -36,7 +36,18 @@ function startProcessing() {
     getUsername(function(username) {
         createPlaylist(username, g_name, function(playlist) {
             console.log('created playlist', playlist);
-            addTracksToPlaylist(username, playlist, g_tracks, function() {
+
+            var tracks = '';
+            var splitted = g_tracks.split(',');
+            for (var i = 0; i < splitted.length; i++) {
+                tracks = tracks + splitted[i] + ',';
+                if (i % 80 == 0) {
+                    addTracksToPlaylist(username, playlist, tracks.slice(0, -1), function() {});
+                    tracks = '';
+				}
+			}
+
+            addTracksToPlaylist(username, playlist, tracks, function() {
                 $('#playlistlink').attr('href', 'spotify:user:'+username+':playlist:'+playlist);
                 $('#creating').hide();
                 $('#done').show();
@@ -93,11 +104,11 @@ function addTracksToPlaylist(username, playlist, tracks, callback) {
 	console.log('addTracksToPlaylist', username, playlist, tracks);
 	var url = 'https://api.spotify.com/v1/users/' + username +
 		'/playlists/' + playlist +
-		'/tracks';
+		'/tracks?uris=' + g_tracks;
 
 	$.ajax(url, {
 		method: 'POST',
-		data: tracks,
+		/*data: JSON.stringify(tracks),*/
 		dataType: 'text',
 		headers: {
 			'Authorization': 'Bearer ' + g_access_token,
