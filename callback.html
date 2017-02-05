@@ -38,11 +38,14 @@ function startProcessing() {
             console.log('created playlist', playlist);
 
             var tracks = '';
+            var k = 0;
             var splitted = g_tracks.split(',');
             for (var i = 0; i < splitted.length; i++) {
                 tracks = tracks + splitted[i] + ',';
                 if (i % 50 == 0) {
-                    addTracksToPlaylist(username, playlist, tracks.slice(0, -1), function() {});
+                    setInterval(function () {
+                        addTracksToPlaylist(username, playlist, tracks.slice(0, -1), function() {});
+                    }, k * 300);
                     tracks = '';
 				}
 			}
