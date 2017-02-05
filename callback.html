@@ -11,7 +11,7 @@
 <script>
 
 var g_access_token = '';
-var g_username = '';
+var g_name = '';
 var g_tracks = '';
 
 function getUsername(callback) {
@@ -52,6 +52,7 @@ function createPlaylist(username, name, callback) {
 			callback(r.id);
 		},
 		error: function(r) {
+		    console.log("error");
 			callback(null);
 		}
 	});
