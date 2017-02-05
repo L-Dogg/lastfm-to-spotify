@@ -31,7 +31,7 @@
 
 	var getTracksFromLastfm = function (userName, limit) {
 		$.ajax({
-			url: "http://ws.audioscrobbler.com/2.0/?method=user.getlovedtracks&user=" + userName +
+			url: "https://ws.audioscrobbler.com/2.0/?method=user.getlovedtracks&user=" + userName +
 				"&api_key=5275ac1e04b48394d83abd58eccc0cce&format=json&limit=" + limit,
             error: function (response) {
                 console.log(response);
@@ -75,7 +75,7 @@
     }
 
 	client_id = '3e1b5000798543d9acea810a30616b17';
-	redirect_uri = 'http://localhost/callback.html';
+	redirect_uri = 'https://lastfm2spotify.herokuapp.com/callback.html';
 
 	var login = function(callback) {
 		var url = 'https://accounts.spotify.com/authorize?client_id=' + client_id +
