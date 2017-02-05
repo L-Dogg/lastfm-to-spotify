@@ -70,7 +70,7 @@
 
 			setTimeout(function () {
                 findOnSpotify(current);
-            }, k * 200);
+            }, k * 300);
 
             //findOnSpotify(current);
 			current.spotifyId = id;
@@ -85,7 +85,7 @@
             if (i % 70 === 0)
             {
                 k++;
-                console.log("interval for i = " + i + " k = " + k + " = " + k * 200 + "ms");
+                console.log("interval for i = " + i + " k = " + k + " = " + k * 300 + "ms");
             }
         })
     }
