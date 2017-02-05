@@ -14,6 +14,37 @@ var g_access_token = '';
 var g_name = '';
 var g_tracks = '';
 
+function startProcessing() {
+    var hash = location.hash.replace(/#/g, '');
+    var all = hash.split('&');
+    var args = {};
+
+    all.forEach(function(keyvalue) {
+        var idx = keyvalue.indexOf('=');
+        var key = keyvalue.substring(0, idx);
+        var val = keyvalue.substring(idx + 1);
+        args[key] = val;
+    });
+
+    g_name = localStorage.getItem('createplaylist-name');
+    g_tracks = localStorage.getItem('createplaylist-tracks');
+
+    if (typeof(args['access_token']) != 'undefined') {
+        g_access_token = args['access_token'];
+    }
+
+    getUsername(function(username) {
+        createPlaylist(username, g_name, function(playlist) {
+            console.log('created playlist', playlist);
+            addTracksToPlaylist(username, playlist, g_tracks, function() {
+                $('#playlistlink').attr('href', 'spotify:user:'+username+':playlist:'+playlist);
+                $('#creating').hide();
+                $('#done').show();
+            });
+        });
+    });
+}
+
 function getUsername(callback) {
 	console.log('getUsername');
 	var url = 'https://api.spotify.com/v1/me';
@@ -79,47 +110,6 @@ function addTracksToPlaylist(username, playlist, tracks, callback) {
 		error: function(r) {
 			callback(null);
 		}
-	});
-}
-
-function startProcessing() {
-
-    console.log('start processing');
-
-	var hash = location.hash.replace(/#/g, '');
-	var all = hash.split('&');
-	var args = {};
-	console.log('all', all);
-	all.forEach(function(keyvalue) {
-		var idx = keyvalue.indexOf('=');
-		var key = keyvalue.substring(0, idx);
-		var val = keyvalue.substring(idx + 1);
-		args[key] = val;
-	});
-
-	g_name = localStorage.getItem('createplaylist-name');
-	g_tracks = localStorage.getItem('createplaylist-tracks');
-
-	console.log(g_tracks);
-
-	console.log('got args', args);
-
-	if (typeof(args['access_token']) != 'undefined') {
-		console.log('got access token', args['access_token']);
-		g_access_token = args['access_token'];
-	}
-
-	getUsername(function(username) {
-		console.log('got username', username);
-		createPlaylist(username, g_name, function(playlist) {
-			console.log('created playlist', playlist);
-			addTracksToPlaylist(username, playlist, g_tracks, function() {
-				console.log('tracks added.');
-				$('#playlistlink').attr('href', 'spotify:user:'+username+':playlist:'+playlist);
-				$('#creating').hide();
-				$('#done').show();
-			});
-		});
 	});
 }
 

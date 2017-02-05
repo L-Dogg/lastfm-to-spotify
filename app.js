@@ -1,11 +1,10 @@
 (function(exports) {
-
-	var g_name = 'Loved tracks from last.fm';
 	var g_tracks = '';
-
-    var id = '';
-
     var prefix = 'spotify:track:';
+    var tracks = new Array();
+
+    client_id = '3e1b5000798543d9acea810a30616b17';
+    redirect_uri = 'http://lastfm2spotify.herokuapp.com/callback.html';
 
 	var findOnSpotify = function(query) {
         $.ajax({
@@ -18,16 +17,15 @@
             },
             success: function (response) {
 
-        	    if (response.tracks == null || response.tracks.items == null || response.tracks.items.length < 1)
-        	        return;
-
-				id = response.tracks.items[0].id;
-
-                g_tracks = g_tracks + (prefix + id) + ",";
-				//console.log(id);
+        	    if (response.tracks == null || response.tracks.items == null || response.tracks.items.length < 1) {
+                    console.log("Couldn't find track: " + query);
+                    return;
+                }
+                g_tracks = g_tracks + (prefix + response.tracks.items[0].id) + ",";
             },
 			error: function (response) {
-                //console.log(response);
+                console.log("Couldn't find track: " + query);
+                console.log(response);
             }
         });
 	}
@@ -44,8 +42,6 @@
             }
 		})
     }
-
-    var tracks = new Array();
 
 	var clearList = function () {
         g_tracks = '';
@@ -72,30 +68,24 @@
                 findOnSpotify(current);
             }, k * 300);
 
-            //findOnSpotify(current);
-			current.spotifyId = id;
             tracks.push(current);
 
             var li = document.createElement("li");
             li.className = "list-group-item";
-            li.appendChild(document.createTextNode(current.artist + " - " + current.song));
+            var image = document.createElement("img");
+            image.src = track.image[0]["#text"];
+            li.appendChild(image);
+            li.appendChild(document.createTextNode("\t" + (i + 1) + ". " + current.artist + " - " + current.song));
             ul.appendChild(li);
 
             i++;
-            if (i % 70 === 0)
-            {
+            if (i % 70 === 0) {
                 k++;
-                console.log(track);
-
-                console.log("interval for i = " + i + " k = " + k + " = " + k * 300 + "ms");
             }
         })
     }
 
-	client_id = '3e1b5000798543d9acea810a30616b17';
-	redirect_uri = 'http://lastfm2spotify.herokuapp.com/callback.html';
-
-	var login = function(callback) {
+	var login = function() {
 		var url = 'https://accounts.spotify.com/authorize?client_id=' + client_id +
 			'&response_type=token' +
 			'&scope=playlist-read-private%20playlist-modify%20playlist-modify-private' +
@@ -107,7 +97,7 @@
 
 	exports.startApp = function() {
 		$('#start').click(function() {
-            login(function() {});
+            login();
 		})
 		$('#loadLoved').click(function (event) {
             event.preventDefault();
