@@ -43,10 +43,11 @@ function startProcessing() {
             for (var i = 0; i < splitted.length; i++) {
                 tracks = tracks + splitted[i] + ',';
                 if (i % 50 == 0) {
-                    setInterval(function () {
+                    setTimeout(function () {
                         addTracksToPlaylist(username, playlist, tracks.slice(0, -1), function() {});
                     }, k * 300);
                     tracks = '';
+			k++;
 				}
 			}
 
