@@ -27,7 +27,7 @@
 				//console.log(id);
             },
 			error: function (response) {
-                console.log(response);
+                //console.log(response);
             }
         });
 	}
@@ -72,7 +72,7 @@
                 findOnSpotify(current);
             }, k * 200);
 
-            findOnSpotify(current);
+            //findOnSpotify(current);
 			current.spotifyId = id;
             tracks.push(current);
 
@@ -82,10 +82,10 @@
             ul.appendChild(li);
 
             i++;
-            if (i % 80 === 0)
+            if (i % 70 === 0)
             {
                 k++;
-                console.log("interval for i = " + i + " k = " + k);
+                console.log("interval for i = " + i + " k = " + k + " = " + k * 200 + "ms");
             }
         })
     }
@@ -109,7 +109,7 @@
 		})
 		$('#loadLoved').click(function (event) {
             event.preventDefault();
-            getTracksFromLastfm(document.getElementById('usernameInput').value, 700);
+            getTracksFromLastfm(document.getElementById('usernameInput').value, 1000);
         });
 }
 
