@@ -85,6 +85,8 @@
             if (i % 70 === 0)
             {
                 k++;
+                console.log(track);
+
                 console.log("interval for i = " + i + " k = " + k + " = " + k * 300 + "ms");
             }
         })
