@@ -41,7 +41,7 @@ function startProcessing() {
             var splitted = g_tracks.split(',');
             for (var i = 0; i < splitted.length; i++) {
                 tracks = tracks + splitted[i] + ',';
-                if (i % 80 == 0) {
+                if (i % 50 == 0) {
                     addTracksToPlaylist(username, playlist, tracks.slice(0, -1), function() {});
                     tracks = '';
 				}
