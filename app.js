@@ -78,7 +78,7 @@
     }
 
 	client_id = '3e1b5000798543d9acea810a30616b17';
-	redirect_uri = 'https://lastfm2spotify.herokuapp.com/callback.html';
+	redirect_uri = 'http://lastfm2spotify.herokuapp.com/callback.html';
 
 	var login = function(callback) {
 		var url = 'https://accounts.spotify.com/authorize?client_id=' + client_id +
