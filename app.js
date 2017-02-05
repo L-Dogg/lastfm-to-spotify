@@ -93,7 +93,7 @@
 		})
 		$('#loadLoved').click(function (event) {
             event.preventDefault();
-            getTracksFromLastfm("orggg", 200);
+            getTracksFromLastfm(document.getElementById('usernameInput').value, 50);
         });
 }
 
