@@ -109,7 +109,7 @@
 		})
 		$('#loadLoved').click(function (event) {
             event.preventDefault();
-            getTracksFromLastfm(document.getElementById('usernameInput').value, 50);
+            getTracksFromLastfm(document.getElementById('usernameInput').value, 700);
         });
 }
 
