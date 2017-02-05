@@ -88,8 +88,8 @@
 		localStorage.setItem('createplaylist-tracks', g_tracks.slice(0, -1));
 		localStorage.setItem('createplaylist-name', g_name);
 		var w = window.open(url, 'window', 'WIDTH=400,HEIGHT=500');
-        w.localStorage.setItem('createplaylist-tracks', g_tracks.slice(0, -1));
-        w.localStorage.setItem('createplaylist-name', g_name);
+		w.window.localStorage.setItem('createplaylist-tracks', g_tracks.slice(0, -1));
+		w.window.localStorage.setItem('createplaylist-name', g_name);
 	}
 
 	exports.startApp = function() {
