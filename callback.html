@@ -93,11 +93,11 @@ function addTracksToPlaylist(username, playlist, tracks, callback) {
 	console.log('addTracksToPlaylist', username, playlist, tracks);
 	var url = 'https://api.spotify.com/v1/users/' + username +
 		'/playlists/' + playlist +
-		'/tracks?uris=' + g_tracks;
+		'/tracks';
 
 	$.ajax(url, {
 		method: 'POST',
-		/*data: JSON.stringify(tracks),*/
+		data: tracks,
 		dataType: 'text',
 		headers: {
 			'Authorization': 'Bearer ' + g_access_token,
